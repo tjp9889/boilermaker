@@ -13,7 +13,7 @@ function Line(contents)
         {
             return evalExpr(execContext, p1);
         }
-        return this.contents.replace(/\$\$(.*?)\$\$/g, executor) + '\n';
+        return this.contents.replace(/#\$\[(.*?)\]\$#/g, executor) + '\n';
     }
 }
 

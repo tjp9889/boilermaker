@@ -20,7 +20,7 @@ function readAndParseFileLines(filename, callback)
 function parseLine(lineNumber, line, callback)
 {
     var result = {number: lineNumber, type: 'line', param: line};
-    var newStr = line.replace(/\$\$\$\s*(end|repeat|if|with|file)\s*(.*?)\s*\$\$\$/g,
+    var newStr = line.replace(/##\[\s*(end|repeat|if|with|file)\s*(.*?)\s*\]##/g,
     function(str, p1, p2) {
       result.type = p1;
       result.param = p2;

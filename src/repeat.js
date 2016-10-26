@@ -19,10 +19,12 @@ function Repeat(expression)
         {
             for (var i in this.contents)
             {
-                var repeatContext = { root: execContext.root, outer: execContext, key: k, value: exprValue[k] };
+                var repeatContext = {};
+                Object.assign(repeatContext, exprValue[k], { _outer: execContext, _globals: execContext._globals, _key: k, _value: exprValue[k]}, execContext._globals);
                 result += this.contents[i].execute(repeatContext);
             }
         }
+
         return result;
     }
 }

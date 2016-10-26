@@ -3,6 +3,7 @@ var Repeat = require('./Repeat.js').Repeat;
 var With = require('./With.js').With;
 var Line = require('./Line.js').Line;
 var File = require('./File.js').File;
+var Root = require('./Root.js').Root;
 
 function Template(filename)
 {
@@ -16,5 +17,6 @@ module.exports = {
     Repeat: Repeat,
     With: With,
     Line: Line,
-    File: File
+    File: File,
+    Root: Root
 };

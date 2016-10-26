@@ -17,18 +17,19 @@ var configData = {
         },
     }
 };
+var rootBlock = new template.Root({});
+var showBlock = new template.Condition("show");
+var personBlock = new template.Repeat("people");
+var personFile = new template.File("'people/' + _key + '.txt'");
+var personLine = new template.Line("Hello $$_key$$!");
+var relationBlock = new template.Repeat("relatives");
+var relationLine = new template.Line("You are related to $$_value$$.");
 
-var showBlock = new template.Condition("root.show");
-var personBlock = new template.Repeat("root.people");
-var personFile = new template.File("'people/' + key + '.txt'");
-var personLine = new template.Line("Hello $$key$$!");
-var relationBlock = new template.Repeat("value.relatives");
-var relationLine = new template.Line("You are related to $$value$$.");
-
+rootBlock.insert(showBlock);
 showBlock.insert(personBlock);
 personBlock.insert(personFile);
 personFile.insert(personLine);
 personFile.insert(relationBlock);
 relationBlock.insert(relationLine);
 
-console.log(showBlock.execute({root: configData, outer: null, this: configData}));
+rootBlock.execute(configData);

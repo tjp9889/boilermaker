@@ -1,37 +1,15 @@
 
-var fs = require('fs');
-var readline = require('readline');
+var process = require('process');
+var Template = require('./template.js').Template;
 
-function test()
+if ((process.argv.length == 5) && (process.argv[2] == "transform"))
 {
-  var rl = readline.createInterface({
-    input: fs.createReadStream('package.json')
-  });
-
-  rl.on('line', (line) => {
-    console.log('Line from file:', line);
-  });
+    var boilerFile = process.argv[3];
+    var configFile = process.argv[4];
+    var t = new Template(boilerFile);
+    t.executeWithFile(configFile);
 }
-
-function linePrint (line)
+else
 {
-  console.log(JSON.stringify(line, null, ' '));
+    console.log("The only supported command is 'node main.js transform test.boiler test.config'");
 }
-
-parseLine(0, "/* $$$ if (a.go)   $$$ */", linePrint);
-parseLine(1, "Hello friend $$friend$$", linePrint);
-parseLine(2, "$$$end$$$", linePrint);
-
-function parseLine(lineNumber, line, callback)
-{
-    var result = {number: lineNumber, type: 'line', param: line};
-    var newStr = line.replace(/\$\$\$\s*(end|repeat|if|with|file)\s*(.*?)\s*\$\$\$/g,
-    function(str, p1, p2) {
-      result.type = p1;
-      result.param = p2;
-      return "";
-    });
-    callback(result);
-    return result;
-}
-

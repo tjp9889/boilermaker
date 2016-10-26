@@ -1,0 +1,13 @@
+
+$$$ repeat people $$$
+$$$ file 'output/people/' + name + '.txt' $$$
+$$$ if has_family $$$
+$$$ repeat family $$$
+$$_outer.name$$ is related to $$_value$$.
+$$$ end $$$
+$$$ end $$$
+$$$ if !has_family $$$
+$$_value$$ has no family!
+$$$ end $$$
+$$$ end $$$
+$$$ end $$$

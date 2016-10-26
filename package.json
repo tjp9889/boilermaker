@@ -1,6 +1,6 @@
 {
   "name": "bmaker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Template based nodejs universal project generator",
   "main": "src/template.js",
   "scripts": {

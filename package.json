@@ -1,0 +1,24 @@
+{
+  "name": "boilermaker",
+  "version": "1.0.0",
+  "description": "Template based nodejs universal project generator",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjp9889/boilermaker.git"
+  },
+  "keywords": [
+    "template",
+    "generate",
+    "generator"
+  ],
+  "author": "Travis Popkave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjp9889/boilermaker/issues"
+  },
+  "homepage": "https://github.com/tjp9889/boilermaker#readme"
+}

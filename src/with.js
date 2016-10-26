@@ -1,6 +1,6 @@
 var evalExpr = require('./evaluator.js').evalExpr;
 
-function Repeat(expression)
+function With(expression)
 {
     this.expression = expression;
     this.contents = [];
@@ -14,17 +14,15 @@ function Repeat(expression)
     {
         var exprValue = evalExpr(execContext, this.expression);
 
+        var withContext = {root: execContext.root, outer: execContext};
+
         var result = "";
-        for (var k in exprValue)
+        for (var i in this.contents)
         {
-            for (var i in this.contents)
-            {
-                var repeatContext = { root: execContext.root, outer: execContext, this: execContext.this, key: k, value: exprValue[k] };
-                result += this.contents[i].execute(repeatContext);
-            }
+            result += this.contents[i].execute(withContext);
         }
         return result;
     }
 }
 
-module.exports = { Repeat: Repeat }
+module.exports = { With: With }

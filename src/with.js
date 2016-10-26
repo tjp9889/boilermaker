@@ -14,7 +14,7 @@ function With(expression)
     {
         var exprValue = evalExpr(execContext, this.expression);
         var withContext = {};
-        Object.assign(repeatContext, exprValue, { _outer: execContext, _globals: execContext._globals }, execContext._globals);
+        Object.assign(repeatContext, exprValue, { _outer: execContext, _global: execContext._global }, execContext._global);
 
         var result = "";
         for (var i in this.contents)

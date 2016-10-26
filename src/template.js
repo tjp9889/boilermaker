@@ -5,10 +5,21 @@ var Line = require('./Line.js').Line;
 var File = require('./File.js').File;
 var Root = require('./Root.js').Root;
 
+var fs = require('fs');
+var readline = require('readline');
+
+const rl = readline.createInterface({
+  input: fs.createReadStream('sample.txt')
+});
+
+rl.on('line', (line) => {
+  console.log('Line from file:', line);
+});
+
 function Template(filename)
 {
     this.filename = filename;
-    this.evaluationTreeRoot;
+    this.treeRoot = new Root({ _filename: filename});
 }
 
 module.exports = {

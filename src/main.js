@@ -1,35 +1,37 @@
-var template = require('./template.js');
 
-var configData = {
-    "show" : true,
-    "people" : {
-        "Travis" : {
-            "relatives" : [
-                "Nat",
-                "Bee"
-            ]
-        },
-        "Randy" : {
-            "relatives" : [
-                "Kim",
-                "Lexi"
-            ]
-        },
-    }
-};
-var rootBlock = new template.Root({});
-var showBlock = new template.Condition("show");
-var personBlock = new template.Repeat("people");
-var personFile = new template.File("'people/' + _key + '.txt'");
-var personLine = new template.Line("Hello $$_key$$!");
-var relationBlock = new template.Repeat("relatives");
-var relationLine = new template.Line("You are related to $$_value$$.");
+var fs = require('fs');
+var readline = require('readline');
 
-rootBlock.insert(showBlock);
-showBlock.insert(personBlock);
-personBlock.insert(personFile);
-personFile.insert(personLine);
-personFile.insert(relationBlock);
-relationBlock.insert(relationLine);
+function test()
+{
+  var rl = readline.createInterface({
+    input: fs.createReadStream('package.json')
+  });
 
-rootBlock.execute(configData);
+  rl.on('line', (line) => {
+    console.log('Line from file:', line);
+  });
+}
+
+function linePrint (line)
+{
+  console.log(JSON.stringify(line, null, ' '));
+}
+
+parseLine(0, "/* $$$ if (a.go)   $$$ */", linePrint);
+parseLine(1, "Hello friend $$friend$$", linePrint);
+parseLine(2, "$$$end$$$", linePrint);
+
+function parseLine(lineNumber, line, callback)
+{
+    var result = {number: lineNumber, type: 'line', param: line};
+    var newStr = line.replace(/\$\$\$\s*(end|repeat|if|with|file)\s*(.*?)\s*\$\$\$/g,
+    function(str, p1, p2) {
+      result.type = p1;
+      result.param = p2;
+      return "";
+    });
+    callback(result);
+    return result;
+}
+

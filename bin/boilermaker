@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 
 var process = require('process');
-var Template = require('./template.js').Template;
+var Template = require('../src/template.js').Template;
 
 if ((process.argv.length == 5) && (process.argv[2] == "transform"))
 {
@@ -11,5 +12,5 @@ if ((process.argv.length == 5) && (process.argv[2] == "transform"))
 }
 else
 {
-    console.log("The only supported command is 'node main.js transform test.boiler test.config'");
+    console.log("The only supported command is 'boilermaker transform <boilerfile> <configfile>'");
 }

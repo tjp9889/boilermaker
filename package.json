@@ -1,8 +1,14 @@
 {
   "name": "bmaker",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Template based nodejs universal project generator",
-  "main": "src/main.js",
+  "main": "src/template.js",
+  "scripts": {
+    "prepublish": "node cleanbin.js"
+  },
+  "bin": {
+    "boilermaker": "generated/boilermaker"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tjp9889/boilermaker.git"
